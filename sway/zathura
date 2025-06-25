@@ -1,0 +1,3 @@
+for_window [app_id=org.pwmt.zathura] floating enable
+for_window [app_id=org.pwmt.zathura] move scratchpad
+for_window [app_id=org.pwmt.zathura] resize set width 824 px
