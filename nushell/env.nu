@@ -1,29 +1,29 @@
-# env.nu
-#
-# Installed by:
-# version = "0.104.1"
-#
-# Previously, environment variables were typically configured in `env.nu`.
-# In general, most configuration can and should be performed in `config.nu`
-# or one of the autoload directories.
-#
-# This file is generated for backwards compatibility for now.
-# It is loaded before config.nu and login.nu
-#
-# See https://www.nushell.sh/book/configuration.html
-#
-# Also see `help config env` for more options.
-#
-# You can remove these comments if you want or leave
-# them for future reference.
-if (ls "/tmp/" | grep $"/tmp/(id -u krabs)-runtime-dir" | is-empty) == true {
+## LOGIN WITH TTY ##
+if (glob "/tmp/**" | grep $"/tmp/(id -u krabs)-runtime-dir" | is-empty) == true {
 mkdir $"/tmp/(id -u krabs)-runtime-dir"
 chmod 0700 $"/tmp/(id -u krabs)-runtime-dir"
 }
 $env.XDG_RUNTIME_DIR = $"/tmp/(id -u krabs)-runtime-dir"
 
+# personal config
+$env.config.show_banner = false
+$env.config.edit_mode = "vi"
+$env.config.table.header_on_separator = true
+
+## GCC ##
+$env.CC = "/usr/local/bin/gcc"
+## RUST ##
+$env.RUSTC = "/usr/local/bin/rustc"
+$env.RUSTDOC = "/usr/local/bin/rustdoc"
+$env.RUSTFMT = "/usr/local/bin/rustfmt"
+$env.CARGO = "/usr/local/bin/cargo"
+## DOTNET ##
+$env.DOTNET_ROOT = '/home/krabs/.dotnet'
+
 $env.PATH = ($env.PATH | append "/home/krabs/.local/bin")
 $env.PATH = ($env.PATH | append "/home/krabs/.cargo/bin")
+$env.PATH = ($env.PATH | append "/home/krabs/.dotnet")
+$env.PATH = ($env.PATH | append "/home/krabs/.dotnet/tools")
 
 $env.config.buffer_editor = "nvim"
 

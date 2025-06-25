@@ -16,18 +16,6 @@
 #
 # You can remove these comments if you want or leave
 # them for future reference.
-$env.config.show_banner = false
-$env.config.edit_mode = "vi"
-$env.config.table.header_on_separator = true
-
-## GCC ##
-$env.CC = "/usr/local/bin/gcc"
-## RUST ##
-$env.RUSTC = "/usr/local/bin/rustc"
-$env.RUSTDOC = "/usr/local/bin/rustdoc"
-$env.RUSTFMT = "/usr/local/bin/rustfmt"
-$env.CARGO = "/usr/local/bin/cargo"
-
 def cheatsh [cmd] {
     curl $"cheat.sh/($cmd)"
 }
