@@ -25,7 +25,7 @@ $env.XDG_RUNTIME_DIR = $"/tmp/(id -u krabs)-runtime-dir"
 $env.PATH = ($env.PATH | append "/home/krabs/.local/bin")
 $env.PATH = ($env.PATH | append "/home/krabs/.cargo/bin")
 
-$env.config_buffer_editor = "nvim"
+$env.config.buffer_editor = "nvim"
 
 $env.CARAPACE_BRIDGES = 'zsh' # optional
 mkdir ~/.cache/carapace
