@@ -1,2 +1,2 @@
-./nushell/history.txt
-./nushell/plugin.msgpackz
+nushell/history.txt
+nushell/plugin.msgpackz
