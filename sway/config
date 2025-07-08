@@ -227,7 +227,7 @@ bar {
 }
 
 # Terminal opacity
-for_window [app_id="Alacritty"] opacity 0.9
+for_window [app_id="Alacritty"] opacity 0.98
 
 include /etc/sway/config.d/*
 include $HOME/.config/sway/zathura
