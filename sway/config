@@ -23,6 +23,13 @@ set $menu wmenu-run
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg $HOME/solid-color-image.jpeg fill
 
+
+exec swayidle -w \
+         timeout 300 'swaylock -f -c 000000' \
+         timeout 600 'swaymsg "output * dpms off"' \
+         resume 'swaymsg "output * dpms on"' \
+         before-sleep 'swaylock -f -c 000000'
+
 font pango:TerminessNerd Font Mono Regular 12
 
 default_border pixel 1
@@ -101,6 +108,7 @@ client.background        $base00
 #
 # Basics:
 #
+    bindsym $mod+z exec zathura
     bindsym $mod+p exec grim - | wl-copy
     # Start a terminal
     bindsym $mod+Return exec $term
