@@ -86,4 +86,15 @@ export ZVM_VI_SURROUND_BINDKEY="s-prefix"
 
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export CARGO_HOME="$HOME/.cargo"
+export RUSTUP_HOME="$HOME/.rustup"
+
+# CLANG
+export LD_LIBRARY_PATH="/usr/local/lib"
+export AR="/usr/local/bin/llvm-ar"
+export NM="/usr/local/bin/llvm-nm"
+export RANLIB="/usr/local/bin/llvm-ranlib"
+export CC="/usr/local/bin/clang"
+export CXX="/usr/local/bin/clang++"
+
 export EDITOR="vim"
