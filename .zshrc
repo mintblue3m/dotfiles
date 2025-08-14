@@ -10,7 +10,7 @@ source $HOME/gitstatus/gitstatus.prompt.zsh
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="doom"
+ZSH_THEME=""
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -78,16 +78,24 @@ fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 autoload -U compinit && compinit
 source "$ZSH/oh-my-zsh.sh"
 
+eval "$(starship init zsh)"
 # User configuration
 
 alias vim="nvim"
+alias nv="NVIM_APPNAME=nvimNew /usr/local/bin/nvim"
 
 export ZVM_VI_SURROUND_BINDKEY="s-prefix"
+
+export PATH="$HOME/git/kitty/kitty/launcher:$PATH"
+export EDITOR="/usr/local/bin/nvim"
+export MANPAGER="nvim +Man!"
 
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export CARGO_HOME="$HOME/.cargo"
 export RUSTUP_HOME="$HOME/.rustup"
+export DOTNET_ROOT="$HOME/.dotnet"
+export PATH="$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools"
 
 # CLANG
 export LD_LIBRARY_PATH="/usr/local/lib"
