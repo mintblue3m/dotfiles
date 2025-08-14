@@ -5,7 +5,10 @@
 # Read `man 5 sway` for a complete reference.
 ### Variables
 #
-exec alacritty
+exec pipewire
+exec pipewire-pulse
+exec dbus-update-activation-environment --all
+exec_always --no-startup-id autotiling
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
 # Home row direction keys, like vim
@@ -14,14 +17,14 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term alacritty
+set $term $HOME/git/kitty/kitty/launcher/kitty
 # Your preferred application launcher
 set $menu wmenu-run
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg $HOME/bg3.jpg fill
+output * bg $HOME/img6.jpg fill
 
 
 exec swayidle -w \
@@ -32,12 +35,14 @@ exec swayidle -w \
 
 font pango:TerminessNerd Font Mono Regular 12
 
-default_border pixel 3
+default_border pixel 0
 default_floating_border normal
-hide_edge_borders smart
+hide_edge_borders both
 
-smart_gaps on
-gaps inner 8
+# smart_gaps on
+smart_borders off
+gaps inner 10
+gaps outer 0
 
 ## Colours
 set $base00 #231c14
@@ -71,6 +76,7 @@ client.background        $base00
 #
     bindsym $mod+z exec zathura
     bindsym $mod+p exec grim - | wl-copy
+    bindsym $mod+Shift+p exec grim -g "$(slurp)" - | wl-copy
     # Start a terminal
     bindsym $mod+Return exec $term
 
@@ -82,8 +88,6 @@ client.background        $base00
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
     # mouse button for dragging.
     floating_modifier $mod normal
 
@@ -225,9 +229,27 @@ bindsym $mod+r mode "resize"
 bar {
     swaybar_command waybar
 }
+# swayfx
+layer_effects "waybar" {
+    blur enable;
+    blur_xray enable;
+}
+layer_effects "kitty" {
+    blur_enable;
+    blur_xray enable;
+}
+
+blur enable
+blur_radius 3
+blur_passes 1
+blur_brightness 1
+corner_radius 12
 
 # Terminal opacity
-for_window [app_id="Alacritty"] opacity 0.98
+for_window [app_id="Alacritty"] opacity 0.90
+for_window [app_id="kitty"] opacity 0.83
+for_window [app_id="kitty"] allow_tearing yes
+for_window [app_id="foot"] opacity 0.90
 
 include /etc/sway/config.d/*
 include $HOME/.config/sway/zathura
