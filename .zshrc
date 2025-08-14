@@ -80,6 +80,11 @@ source "$ZSH/oh-my-zsh.sh"
 
 eval "$(starship init zsh)"
 # User configuration
+LIVE_COUNTER=$(ps a | awk '{print $2}' | grep -vi "tty*" | uniq | wc -l);
+if [ $LIVE_COUNTER -eq 1 ]; then
+ fastfetch --percent-type 6 --percent-color-green "#ffffff"
+fi
+
 
 alias vim="nvim"
 alias nv="NVIM_APPNAME=nvimNew /usr/local/bin/nvim"
