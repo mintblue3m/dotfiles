@@ -5,6 +5,7 @@
 # Read `man 5 sway` for a complete reference.
 ### Variables
 #
+include colors.conf
 exec pipewire
 exec pipewire-pulse
 exec dbus-update-activation-environment --all
@@ -19,8 +20,7 @@ set $right l
 # Your preferred terminal emulator
 set $term $HOME/git/kitty/kitty/launcher/kitty
 # Your preferred application launcher
-set $menu wmenu-run
-
+set $menu fuzzel
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
@@ -35,40 +35,14 @@ exec swayidle -w \
 
 font pango:TerminessNerd Font Mono Regular 12
 
-default_border pixel 0
-default_floating_border normal
-hide_edge_borders both
+default_border pixel 3
+default_floating_border pixel 2
+# hide_edge_borders both
 
 # smart_gaps on
-smart_borders off
-gaps inner 10
-gaps outer 0
-
-## Colours
-set $base00 #231c14
-set $base01 #5f8787
-set $base02 #c1c1c1
-set $base03 #888888
-set $base04 #aaaaaa
-set $base05 #999999
-set $base06 #ddeecc
-set $base07 #c1c1c1
-set $base08 #505050
-set $base09 #5f8787
-set $base0A #c1c1c1
-set $base0B #888888
-set $base0C #aaaaaa
-set $base0D #99bbaa
-set $base0E #ddeecc
-set $base0F #c1c1c1
-
-## Window Colours
-client.focused   $base0D  $base00  $base06  $base08  $base09
-client.focused_inactive  $base02  $base00  $base06  $base08  $base02
-client.unfocused   $base01  $base00  $base06  $base08  $base02
-client.urgent   $base07  $base00  $base08  $base0B  $base02
-client.placeholder       $base02  $base00  $base06  $base03  $base04
-client.background        $base00
+# smart_borders off
+gaps inner 5
+gaps outer 7
 
 ### Key bindings
 #
@@ -233,23 +207,21 @@ bar {
 layer_effects "waybar" {
     blur enable;
     blur_xray enable;
+    blur_ignore_transparent enable;
+    shadows enable;
+    corner_radius 12;
 }
-layer_effects "kitty" {
-    blur_enable;
-    blur_xray enable;
-}
-
 blur enable
 blur_radius 3
-blur_passes 1
-blur_brightness 1
+blur_passes 2
 corner_radius 12
 
+shadows enable
+shadow_offset 5 5
+default_dim_inactive 0.17
+
 # Terminal opacity
-for_window [app_id="Alacritty"] opacity 0.90
-for_window [app_id="kitty"] opacity 0.83
-for_window [app_id="kitty"] allow_tearing yes
-for_window [app_id="foot"] opacity 0.90
+for_window [class=".*"] opacity 0.88
 
 include /etc/sway/config.d/*
 include $HOME/.config/sway/zathura
