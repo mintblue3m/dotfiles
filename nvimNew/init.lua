@@ -34,7 +34,7 @@ vim.pack.add({
     {src = "https://github.com/Saghen/blink.cmp"},
     {src = "https://github.com/mikesmithgh/kitty-scrollback.nvim"}
 })
-vim.cmd.colorscheme("duckbones")
+vim.cmd.colorscheme("tokyobones")
 vim.cmd(":hi statusline guibg=NONE")
 
 require("mini.starter").setup()
