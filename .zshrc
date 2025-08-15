@@ -82,12 +82,12 @@ eval "$(starship init zsh)"
 # User configuration
 LIVE_COUNTER=$(ps a | awk '{print $2}' | grep -vi "tty*" | uniq | wc -l);
 if [ $LIVE_COUNTER -eq 1 ]; then
- fastfetch --percent-type 6 --percent-color-green "#ffffff"
+ fastfetch --percent-type 6 
 fi
 
 
 alias vim="nvim"
-alias nv="NVIM_APPNAME=nvimNew /usr/local/bin/nvim"
+# alias nv="NVIM_APPNAME=nvimNew /usr/local/bin/nvim"
 
 export ZVM_VI_SURROUND_BINDKEY="s-prefix"
 
