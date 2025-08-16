@@ -9,7 +9,7 @@ include colors.conf
 exec pipewire
 exec pipewire-pulse
 exec dbus-update-activation-environment --all
-exec_always --no-startup-id autotiling
+exec_always "$HOME/git/autotiling-rs/target/release/autotiling-rs"
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
 # Home row direction keys, like vim
@@ -49,6 +49,7 @@ gaps outer 7
 # Basics:
 #
     bindsym $mod+z exec zathura
+    bindsym $mod+Shift+z exec "kitty /home/krabs/scripts/zathura-epub.sh"
     bindsym $mod+p exec grim - | wl-copy
     bindsym $mod+Shift+p exec grim -g "$(slurp)" - | wl-copy
     # Start a terminal
@@ -200,21 +201,26 @@ bindsym $mod+r mode "resize"
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
+
 bar {
-    swaybar_command waybar
+   position top
+   font pango:Cozette Regular 9.8
+   status_command while ~/.config/sway/scripts/sway_bar.sh; do sleep 1; done
+
+   colors {
+       statusline #B8C3FF
+       background #ffffff00
+       inactive_workspace #ffffff00 #ffffff00 #ffffff00 
+       active_workspace  #DFE1F9 #374379 #C3C5DD
+       focused_workspace  #4F5B92 #6D82DF #B8C3FF
+   }
 }
+
 # swayfx
-layer_effects "waybar" {
-    blur enable;
-    blur_xray enable;
-    blur_ignore_transparent enable;
-    shadows enable;
-    corner_radius 12;
-}
 blur enable
 blur_radius 3
 blur_passes 2
-corner_radius 12
+corner_radius 0
 
 shadows enable
 shadow_offset 5 5
