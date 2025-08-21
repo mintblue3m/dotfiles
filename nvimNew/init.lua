@@ -15,10 +15,9 @@ vim.o.smartcase = true
 vim.o.signcolumn = "no"
 vim.o.incsearch = true
 vim.o.updatetime = 300
-vim.o.winborder = "rounded"
+vim.o.winborder = "bold"
 vim.o.cursorcolumn = false
 vim.o.signcolumn = "yes"
-
 -- windows
 vim.o.splitbelow = true
 vim.o.splitright = true
@@ -26,18 +25,44 @@ vim.o.splitright = true
 vim.g.mapleader = " "
 
 vim.pack.add({
-    {src = "https://github.com/zenbones-theme/zenbones.nvim"},
-    {src = "https://github.com/rktjmp/lush.nvim"},
+    {src = "https://github.com/vague2k/vague.nvim"},
     {src = "https://github.com/echasnovski/mini.nvim"},
     {src = "https://github.com/neovim/nvim-lspconfig"},
     {src = "https://github.com/rafamadriz/friendly-snippets"},
     {src = "https://github.com/Saghen/blink.cmp"},
     {src = "https://github.com/mikesmithgh/kitty-scrollback.nvim"}
 })
-vim.cmd.colorscheme("tokyobones")
 vim.cmd(":hi statusline guibg=NONE")
+require("vague").setup()
+vim.cmd.colorscheme("vague")
 
-require("mini.starter").setup()
+require("mini.tabline").setup()
+require("mini.sessions").setup()
+require("mini.starter").setup({
+    evaluate_single = true,
+    header = table.concat({
+"                         ███                 ",
+"                        ░░░                  ",
+" ████████   █████ █████ ████  █████████████  ",
+"░░███░░███ ░░███ ░░███ ░░███ ░░███░░███░░███ ",
+" ░███ ░███  ░███  ░███  ░███  ░███ ░███ ░███ ",
+" ░███ ░███  ░░███ ███   ░███  ░███ ░███ ░███ ",
+" ████ █████  ░░█████    █████ █████░███ █████",
+"░░░░ ░░░░░    ░░░░░    ░░░░░ ░░░░░ ░░░ ░░░░░ ",
+  }, "\n"),
+    items = {
+      require("mini.starter").sections.builtin_actions(),
+      require("mini.starter").sections.recent_files(10, false),
+      require("mini.starter").sections.recent_files(10, true),
+      -- Use this if you set up 'mini.sessions'
+      require("mini.starter").sections.sessions(5, true)
+    },
+    content_hooks = {
+      require("mini.starter").gen_hook.adding_bullet(),
+      require("mini.starter").gen_hook.indexing('all', { 'Builtin actions' }),
+      require("mini.starter").gen_hook.aligning('center', 'center'),
+    },
+  })
 require("mini.icons").setup()
 require("mini.statusline").setup()
 require("mini.pairs").setup()
@@ -45,10 +70,21 @@ require("mini.move").setup()
 require("mini.surround").setup()
 require("mini.pick").setup()
 require("mini.files").setup()
+require("mini.jump").setup()
+require("mini.jump2d").setup()
+require("mini.extra").setup()
+require("mini.ai").setup()
 
 vim.keymap.set("n", "<leader>ff", ":Pick files<CR>")
 vim.keymap.set("n", "<leader>fm", ":lua MiniFiles.open()<CR>")
-vim.keymap.set("n", "<leader>c", ":lua MiniPick.start({ source = { items = vim.fn.readdir('/home/krabs/.config/nvimNew') } })<CR>")
+vim.keymap.set("n", "<leader>c", ":lua MiniPick.start({ source = { items = vim.fn.readdir('/home/krabs/.config/nvim') } })<CR>")
+vim.keymap.set("n", "<leader>p", ":lua MiniFiles.open('/home/krabs/.local/share/nvim/site/pack/core/opt')<CR>")
+vim.keymap.set("n", "<leader>b", ":Pick buffers<CR>")
+vim.keymap.set("n", "<leader>rg", ":Pick grep_live<CR>")
+vim.keymap.set("v", "<leader>y", '"+y')
+vim.keymap.set("n", "<leader>yy", '"+Y')
+
+vim.ui.select = require("mini.pick").ui_select
 
 vim.lsp.config('lua_ls', {on_init = function(client)
 if client.workspace_folders then
@@ -152,3 +188,4 @@ require("blink.cmp").setup({
 })
 
 require("kitty-scrollback").setup()
+
